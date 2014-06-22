@@ -160,14 +160,11 @@ plot(rfModel)
 <img src="https://cloud.githubusercontent.com/assets/1554515/3352730/d81e082e-fa57-11e3-9def-8d80b1838243.png">
 
 <pre><code>
-varImpPlot(rfModel,cex=.5) 
+varImpPlot(rfModel,cex=.5)
+out.testing<-predict(rfModel,filtered.testing4)
 </code></pre>
 
 <img src="https://cloud.githubusercontent.com/assets/1554515/3352728/d8021d12-fa57-11e3-9ab6-491cbf920be2.png">
-
-<pre><code>
-out.testing<-predict(rfModel,filtered.testing4)
-</code></pre>
 
         <h3>
           <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages">
