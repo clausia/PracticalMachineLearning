@@ -133,7 +133,7 @@ correlations <- cor(traininig4)
 corrplot(correlations,order = "hclust",tl.cex = .5)
 </code></pre>
 
-<img src="https://cloud.githubusercontent.com/assets/1554515/3352650/fdedde44-fa52-11e3-9831-06a3c96ade28.png">
+<img src="https://cloud.githubusercontent.com/assets/1554515/3352729/d810b7f0-fa57-11e3-8809-2f8a0a93ab73.png">
 
 <pre><code>
 highCorr <- findCorrelation(correlations, cutoff = .75)
@@ -157,13 +157,13 @@ par(mar=c(3,4,4,4))
 plot(rfModel)
 </code></pre>
 
-<img src="https://cloud.githubusercontent.com/assets/1554515/3352654/14fdbe06-fa53-11e3-8c95-323dca397434.png">
+<img src="https://cloud.githubusercontent.com/assets/1554515/3352730/d81e082e-fa57-11e3-9def-8d80b1838243.png">
 
 <pre><code>
 varImpPlot(rfModel,cex=.5) 
 </code></pre>
 
-<img src="https://cloud.githubusercontent.com/assets/1554515/3352653/14fdb4f6-fa53-11e3-94e5-b6513446361c.png">
+<img src="https://cloud.githubusercontent.com/assets/1554515/3352728/d8021d12-fa57-11e3-9ab6-491cbf920be2.png">
 
 <pre><code>
 out.testing<-predict(rfModel,filtered.testing4)
