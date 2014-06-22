@@ -5,33 +5,33 @@ library(reshape)
 library(corrplot)
 library(AppliedPredictiveModeling)
 
-train<-read.csv("pml-training.csv",stringsAsFactor=FALSE,skip = 0,fill=NA,comment.char="#")
-test<-read.csv("pml-testing.csv")
+traininig<-read.csv("pml-traininig.csv",stringsAsFactor=FALSE,skip=0,fill=NA,comment.char="#")
+testing<-read.csv("pml-testinging.csv")
 
-var<-names(train)[apply(train,2,function(x) table(is.na(x))[1]==19622)]   
-train2<-train[,var]
-test2<-test[,var[-length(var)]]
-var2<-melt(apply(train2,2,function(x) sum(ifelse(x=="",1,0)))==0)
+var<-names(traininig)[apply(traininig,2,function(x) table(is.na(x))[1]==19622)]   
+traininig2<-traininig[,var]
+testing2<-testing[,var[-length(var)]]
+var2<-melt(apply(traininig2,2,function(x) sum(ifelse(x=="",1,0)))==0)
 
 select.var<-rownames(var2)[var2$value==TRUE]
-train3<-train2[,select.var]
-test3<-test2[,select.var[-length(select.var)]]
-train4<-train3[,names(train3[-c(1:7,length(train3))])]
-test4<-test3[,names(test3[-c(1:7)])]
-correlations <- cor(train4)
+traininig3<-traininig2[,select.var]
+testing3<-testing2[,select.var[-length(select.var)]]
+traininig4<-traininig3[,names(traininig3[-c(1:7,length(traininig3))])]
+testing4<-testing3[,names(testing3[-c(1:7)])]
+correlations <- cor(traininig4)
 corrplot(correlations,order = "hclust",tl.cex = .5)
 highCorr <- findCorrelation(correlations, cutoff = .75)
-predictor <- train4[, -highCorr]
-filtered.test4 <- test4[, -highCorr]
-classe<-train3$classe
-trainData<-cbind(classe,predictor)
-rfModel <- randomForest(classe ~ .,data = trainData,importance = TRUE,ntrees = 10)
+predictor <- traininig4[, -highCorr]
+filtered.testing4 <- testing4[, -highCorr]
+classe<-traininig3$classe
+traininigData<-cbind(classe,predictor)
+rfModel <- randomForest(classe ~ .,data = traininigData,importance = TRUE,ntrees = 10)
 
 par(mar=c(3,4,4,4)) 
 plot(rfModel)
 varImpPlot(rfModel,cex=.5) 
-out.test<-predict(rfModel,filtered.test4)
-answers<- as.vector(out.test)
+out.testing<-predict(rfModel,filtered.testing4)
+answers<- as.vector(out.testing)
 
 pml_write_files = function(x){
   n = length(x)
